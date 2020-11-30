@@ -1,24 +1,12 @@
-import { ADD_NOTE } from "../actions/actions";
+import { combineReducers } from 'redux';
+import visibilityFilter from './visibilityFilter';
+import notesReducer from './notesReducer';
+import testingReducer from './testingState';
 
-const initialState = {
-  notes: [],
-};
+const reducers = combineReducers({
+  notes: notesReducer,
+  visibility: visibilityFilter,
+  test: testingReducer,
+});
 
-function rootReducer(state = initialState, action) {
-  switch (action.type) {
-    case ADD_NOTE:
-      return {
-        notes: [
-          ...state.notes,
-          {
-            title: action.title,
-            content: action.content,
-          },
-        ],
-      };
-    default:
-      return state;
-  }
-}
-
-export default rootReducer;
+export default reducers;
